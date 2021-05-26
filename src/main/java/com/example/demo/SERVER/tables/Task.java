@@ -15,10 +15,9 @@ import java.util.Set;
 @Entity
 @Table(name = "tasks")
 public class Task {
-    public Task(String name, String description,Date deadline, Boolean success){
+    public Task(String name, String description,Date deadline){
         this.name=name;
         this.description=description;
-        this.success=success;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY,generator = "taskid")
@@ -32,10 +31,6 @@ public class Task {
 
     @Column
     private Date deadline;
-
-    @Column
-    private Boolean success;
-
 
     @CreatedDate
     @Column
@@ -51,8 +46,6 @@ public class Task {
     @JoinColumn(name = "user_id")
     private User user;
 
-
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "category_like",
@@ -67,7 +60,6 @@ public class Task {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", deadline=" + deadline +
-                ", success=" + success +
                 ", created=" + created +
                 ", updated=" + updated +
                 ", user=" + user +

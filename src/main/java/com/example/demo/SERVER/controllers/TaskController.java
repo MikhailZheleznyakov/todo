@@ -1,7 +1,6 @@
 package com.example.demo.SERVER.controllers;
 
 import com.example.demo.SERVER.repository.TaskRepository;
-import com.example.demo.SERVER.tables.Category;
 import com.example.demo.SERVER.tables.Task;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +49,6 @@ public class TaskController {
                     task.setName(taskUpdate.getName());
                     task.setDescription(taskUpdate.getDescription());
                     task.setDeadline(taskUpdate.getDeadline());
-                    task.setSuccess(taskUpdate.getSuccess());
                     task.setCreated(taskUpdate.getCreated());
                     task.setUpdated(taskUpdate.getUpdated());
                     task.setUser(taskUpdate.getUser());
