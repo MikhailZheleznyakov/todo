@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -15,7 +16,7 @@ import java.util.Set;
 @Entity
 @Table(name = "tasks")
 public class Task {
-    public Task(String name, String description,Date deadline){
+    public Task(String name, String description,LocalDate deadline){
         this.name=name;
         this.description=description;
     }
@@ -30,7 +31,7 @@ public class Task {
     private String description;
 
     @Column
-    private Date deadline;
+    private LocalDate deadline;
 
     @CreatedDate
     @Column
@@ -51,7 +52,7 @@ public class Task {
             name = "category_like",
             joinColumns = @JoinColumn(name = "task_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> category;
+    private List<Category> category;
 
     @Override
     public String toString() {

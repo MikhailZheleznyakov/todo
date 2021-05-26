@@ -7,6 +7,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -39,7 +40,7 @@ public class Category{
             name = "category_like",
             joinColumns = @JoinColumn(name = "category_id"),
             inverseJoinColumns = @JoinColumn(name = "task_id"))
-    private Set<Task> tasks;
+    private List<Task> tasks;
 
     @Override
     public String toString() {

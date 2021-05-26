@@ -7,14 +7,13 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "users")
 public class User {
-    public User(String login, String surname, String name, String father_name, Date birthday) {
+    public User(String login, String surname, String name, String father_name, LocalDate birthday) {
         this.login = login;
         this.surname = surname;
         this.name = name;
@@ -39,7 +38,7 @@ public class User {
     private String father_name;
 
     @Column
-    private Date birthday;
+    private LocalDate birthday;
 
     @CreatedDate
     @Column
