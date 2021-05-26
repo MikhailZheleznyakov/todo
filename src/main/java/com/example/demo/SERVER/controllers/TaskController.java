@@ -1,7 +1,10 @@
 package com.example.demo.SERVER.controllers;
 
 import com.example.demo.SERVER.repository.TaskRepository;
+import com.example.demo.SERVER.tables.Category;
 import com.example.demo.SERVER.tables.Task;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,5 +31,31 @@ public class TaskController {
     @GetMapping("/getTaskAll")
     List<Task> getTaskAll(){
         return this.taskRepository.findAll();
+    }
+
+    @DeleteMapping("/deleteTask/{id}")
+    public ResponseEntity<?> deleteTask(@PathVariable Long id){
+        return taskRepository.findById(id)
+                .map(task -> {
+                    taskRepository.delete(task);
+                    return ResponseEntity.ok().build();
+                }).orElseThrow(()-> new ResourceNotFoundException("not found" + id));
+
+    }
+
+    @PutMapping("/updateTask/{id}")
+    public Task updateTask(@PathVariable Long id, @RequestBody Task taskUpdate) {
+        return taskRepository.findById(id)
+                .map(task -> {
+                    task.setName(taskUpdate.getName());
+                    task.setDescription(taskUpdate.getDescription());
+                    task.setDeadline(taskUpdate.getDeadline());
+                    task.setSuccess(taskUpdate.getSuccess());
+                    task.setCreated(taskUpdate.getCreated());
+                    task.setUpdated(taskUpdate.getUpdated());
+                    task.setUser(taskUpdate.getUser());
+                    task.setCategory(taskUpdate.getCategory());
+                    return taskRepository.save(task);
+                }).orElseThrow(()-> new ResourceNotFoundException("not found" + id));
     }
 }

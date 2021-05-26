@@ -1,16 +1,21 @@
 package com.example.demo.SERVER.tables;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "tasks")
 public class Task {
-    public Task(String name, String description, String success){
+    public Task(String name, String description,Date deadline, Boolean success){
         this.name=name;
         this.description=description;
         this.success=success;
@@ -26,10 +31,10 @@ public class Task {
     private String description;
 
     @Column
-    private LocalDate deadline;
+    private Date deadline;
 
     @Column
-    private String success;
+    private Boolean success;
 
 
     @CreatedDate
@@ -55,85 +60,18 @@ public class Task {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> category;
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public LocalDate getDeadline() {
-        return deadline;
-    }
-
-    public String getSuccess() {
-        return success;
-    }
-
-    public LocalDate getCreated() {
-        return created;
-    }
-
-    public LocalDate getUpdated() {
-        return updated;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Set<Category> getCategory() {
-        return category;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setDeadline(LocalDate deadline) {
-        this.deadline = deadline;
-    }
-
-    public void setSuccess(String success) {
-        this.success = success;
-    }
-
-    public void setCreated(LocalDate created) {
-        this.created = created;
-    }
-
-    public void setUpdated(LocalDate updated) {
-        this.updated = updated;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setCategory(Set<Category> category) {
-        this.category = category;
-    }
-
     @Override
     public String toString() {
         return "Task{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", success='" + success + '\'' +
+                ", deadline=" + deadline +
+                ", success=" + success +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", user=" + user +
+                ", category=" + category +
                 '}';
     }
 }

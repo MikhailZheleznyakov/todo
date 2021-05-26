@@ -2,6 +2,8 @@ package com.example.demo.SERVER.controllers;
 
 import com.example.demo.SERVER.repository.CategoryRepository;
 import com.example.demo.SERVER.tables.Category;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +32,32 @@ public class CategoryController {
     List<Category> getClientAll(){
         return this.categoryRepository.findAll();
     }
+
+    @DeleteMapping("/deleteCategory/{id}")
+    public ResponseEntity<?> deleteCategory(@PathVariable Long id){
+        return categoryRepository.findById(id)
+                .map(category -> {
+                    categoryRepository.delete(category);
+                    return ResponseEntity.ok().build();
+                }).orElseThrow(()-> new ResourceNotFoundException("not found" + id));
+
+    }
+
+    @PutMapping("/updateCategory/{id}")
+    public Category updateCategory(@PathVariable Long id, @RequestBody Category categoryUpdate) {
+        return categoryRepository.findById(id)
+                .map(category -> {
+                    category.setName(categoryUpdate.getName());
+                    category.setTasks(categoryUpdate.getTasks());
+                    category.setCreated(categoryUpdate.getCreated());
+                    category.setUpdated(categoryUpdate.getUpdated());
+                    return categoryRepository.save(category);
+                }).orElseThrow(()-> new ResourceNotFoundException("not found" + id));
+    }
+
+
+
+
 
 
 
