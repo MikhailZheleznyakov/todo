@@ -13,11 +13,12 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "users")
 public class User {
-    public User(String login, String surname, String name, String father_name, LocalDate birthday) {
+    public User(String login, String surname, String name, String father_name, String password, LocalDate birthday) {
         this.login = login;
         this.surname = surname;
         this.name = name;
         this.father_name = father_name;
+        this.password = password;
         this.birthday = birthday;
     }
 
@@ -38,6 +39,9 @@ public class User {
     private String father_name;
 
     @Column
+    private String password;
+
+    @Column
     private LocalDate birthday;
 
     @CreatedDate
@@ -54,12 +58,15 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "ID=" + id +
-                ", Login='" + login + '\'' +
-                ", Surname='" + surname + '\'' +
-                ", Name='" + name + '\'' +
-                ", Father name='" + father_name + '\'' +
-                ", Birthday=" + birthday +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", father_name='" + father_name + '\'' +
+                ", password='" + password + '\'' +
+                ", birthday=" + birthday +
+                ", created=" + created +
+                ", updated=" + updated +
                 '}';
     }
 }

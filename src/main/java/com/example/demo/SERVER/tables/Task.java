@@ -19,6 +19,7 @@ public class Task {
     public Task(String name, String description,LocalDate deadline){
         this.name=name;
         this.description=description;
+        this.deadline=deadline;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY,generator = "taskid")
