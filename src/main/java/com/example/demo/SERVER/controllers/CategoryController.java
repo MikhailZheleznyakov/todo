@@ -2,6 +2,7 @@ package com.example.demo.SERVER.controllers;
 
 import com.example.demo.SERVER.repository.CategoryRepository;
 import com.example.demo.SERVER.tables.Category;
+import com.example.demo.SERVER.tables.User;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,11 @@ public class CategoryController {
     Category createCategory(@RequestBody Category category){
         System.out.println(category);
         return this.categoryRepository.save(category);
+    }
+
+    @GetMapping("/getCategoryAll")
+    List<Category> getCategoryAll(){
+        return this.categoryRepository.findAll();
     }
 
     @GetMapping("/getCategory={id}")
